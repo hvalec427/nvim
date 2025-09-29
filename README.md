@@ -48,3 +48,16 @@ Windows (Splits)
 - Ctrl-W + v split vertical
 - Ctrl-W + w switch window (up or down)
 - Ctrl-W + hjkl switch to left, down, up or right window
+
+Telescope
+- <leader>ff find files
+- <leader>fg live grep
+- <leader>fb file browser
+
+Visual
+- "gra" vim.lsp.buf.code_action()
+- "an" and "in" outer and inner incremental selections
+
+LSP
+- grn Rename • gra Code Action
+- gri Go to Implementation • grr References • grt Type Definition
