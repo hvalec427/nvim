@@ -9,6 +9,8 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.number = true         -- show absolute line number for current line
 vim.opt.relativenumber = true -- show relative numbers for all other lines
+vim.opt.ignorecase = true     -- ignore case when searching
+vim.opt.smartcase = true      -- but be case-sensitive if uppercase is used
 
 -- =========================
 -- Bootstrap lazy.nvim
