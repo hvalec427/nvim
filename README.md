@@ -59,5 +59,8 @@ Visual
 - "an" and "in" outer and inner incremental selections
 
 LSP
-- grn Rename • gra Code Action
-- gri Go to Implementation • grr References • grt Type Definition
+- grn Rename
+- gra Code Action
+- gri Go to Implementation
+- grr References
+- grt Type Definition
