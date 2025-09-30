@@ -49,6 +49,47 @@ require("lazy").setup({
 -- =========================
 
 -- Telescope
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live grep" })
+local telescope = require("telescope.builtin")
+
+-- Clean search (ignore junk, ignore .gitignore)
+vim.keymap.set("n", "<leader>ff", function()
+  telescope.find_files({
+    no_ignore = true, -- don't respect .gitignore
+    hidden = true,    -- include dotfiles
+    file_ignore_patterns = { "node_modules", "%.git/", "dist", "build", "Pods", "ios/build", "android/.idea" },
+  })
+end, { desc = "Find files (ignore .gitignore, skip junk)" })
+
+-- Raw search (include EVERYTHING)
+vim.keymap.set("n", "<leader>fF", function()
+  telescope.find_files({
+    no_ignore = true,
+    hidden = true,
+  })
+end, { desc = "Find ALL files (even node_modules)" })
+
+-- Clean grep (ignore junk)
+vim.keymap.set("n", "<leader>fg", function()
+  telescope.live_grep({
+    additional_args = function(_)
+      return {
+        "--no-ignore",
+        "--hidden",
+        "--glob=!node_modules/*",
+        "--glob=!dist/*",
+        "--glob=!.git/*",
+        "--glob=!build/*",
+      }
+    end,
+  })
+end, { desc = "Live grep (ignore .gitignore, skip junk)" })
+
+-- Raw grep (everything, even node_modules)
+vim.keymap.set("n", "<leader>fG", function()
+  telescope.live_grep({
+    additional_args = function(_)
+      return { "--no-ignore", "--hidden" }
+    end,
+  })
+end, { desc = "Live grep ALL (even node_modules)" })
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope file_browser<cr>", { desc = "File browser" })

@@ -18,6 +18,11 @@ Insert Lines
 - O new line above
 - o new line below
 
+Searching in file
+- /query
+- \c case insensitive
+- \C case sensitive
+
 Selections
 - v characterwise
 - V linewise
@@ -40,6 +45,10 @@ Swap Lines
 Undo / Redo
 - u undo
 - Ctrl+r redo
+
+Comments
+- gcc comment/uncomment
+- gc in visual mode
 
 Windows (Splits)
 - Ctrl-W + c close window
