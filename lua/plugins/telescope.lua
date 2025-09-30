@@ -11,8 +11,26 @@ return {
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
-      require("telescope").load_extension("file_browser")
+      local telescope = require("telescope")
+      local fb_actions = require("telescope").extensions.file_browser.actions
+
+      telescope.setup({
+        extensions = {
+          file_browser = {
+            mappings = {
+              ["n"] = {
+                -- Normal mode
+                ["<leader>n"] = fb_actions.create,
+                ["<leader>r"] = fb_actions.rename,
+                ["<leader>d"] = fb_actions.remove,
+                ["<leader>m"] = fb_actions.move,
+              },
+            },
+          },
+        },
+      })
+
+      telescope.load_extension("file_browser")
     end,
   },
 }
-

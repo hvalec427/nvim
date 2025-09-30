@@ -92,4 +92,11 @@ vim.keymap.set("n", "<leader>fG", function()
     end,
   })
 end, { desc = "Live grep ALL (even node_modules)" })
-vim.keymap.set("n", "<leader>fb", "<cmd>Telescope file_browser<cr>", { desc = "File browser" })
+
+vim.keymap.set("n", "<leader>fb", function()
+  require("telescope").extensions.file_browser.file_browser({
+    path = "%:p:h",         -- start in the current buffer's directory
+    select_buffer = true,   -- open with buffer's path selected
+    initial_mode = "normal" -- start in normal mode instead of insert
+  })
+end, { desc = "File browser in current buffer dir" })
