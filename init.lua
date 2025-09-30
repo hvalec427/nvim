@@ -41,6 +41,7 @@ require("lazy").setup({
   require("plugins.cmp"),
   require("plugins.lsp"),
   require("plugins.conform"),
+  require("plugins.lazygit"),
   { "nvim-tree/nvim-web-devicons", lazy = true },
 })
 
