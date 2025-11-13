@@ -22,6 +22,7 @@ Searching in file
 - /query
 - \c case insensitive
 - \C case sensitive
+- :%s@search@replace@gc
 
 Selections
 - v characterwise

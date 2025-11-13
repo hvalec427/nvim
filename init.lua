@@ -95,3 +95,5 @@ vim.keymap.set("n", "<leader>fb", function()
   })
 end, { desc = "File browser in current buffer dir" })
 
+-- other
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = '[E]xpand diagnostic message' })
