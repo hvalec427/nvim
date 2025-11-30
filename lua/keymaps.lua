@@ -1,23 +1,23 @@
--- Centralized keymaps for core UX and plugin integrations.
 local telescope = require("telescope.builtin")
+local keymap_list = require("keymap_list")
 local map = vim.keymap.set
 local M = {}
 
 -- Telescope pickers
 map("n", "<leader>ff", function()
   telescope.find_files({})
-end, { desc = "Find files (ignore .gitignore, skip junk)" })
+end, { desc = "[f]ind [f]iles (ignore .gitignore, skip junk)" })
 
 map("n", "<leader>fF", function()
   telescope.find_files({
     no_ignore = true,
     hidden = true,
   })
-end, { desc = "Find ALL files (even node_modules)" })
+end, { desc = "[f]ind [F]ILES (even node_modules)" })
 
 map("n", "<leader>fg", function()
   telescope.live_grep({})
-end, { desc = "Live grep (ignore .gitignore, skip junk)" })
+end, { desc = "[f]uzzy [g]rep (ignore .gitignore)" })
 
 map("n", "<leader>fG", function()
   telescope.live_grep({
@@ -25,17 +25,17 @@ map("n", "<leader>fG", function()
       return { "--no-ignore", "--hidden" }
     end,
   })
-end, { desc = "Live grep ALL (even node_modules)" })
+end, { desc = "[f]uzzy [G]REP (hit ALL files)" })
 
 -- git
 map("n", "<leader>fs", function()
   telescope.git_status({
     initial_mode = "normal",
   })
-end, { desc = "Git status (normal mode)" })
+end, { desc = "[f]ile [s]tatus (Git status picker)" })
 
 -- LazyGit
-map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
+map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "[l]azy [g]it" })
 
 -- lsp
 map("n", "gi", vim.lsp.buf.type_definition, { desc = "[g]o to [i]mplementation" })
@@ -49,7 +49,13 @@ map("n", "<leader>fb", function()
     select_buffer = true,
     initial_mode = "normal",
   })
-end, { desc = "File browser in current buffer dir" })
+end, { desc = "[f]ile [b]rowser (buffer dir)" })
+
+map("n", "<leader>e", vim.diagnostic.open_float, { desc = "[e]xpand diagnostic message" })
+
+map("n", "<leader>?", function()
+  keymap_list.show()
+end, { desc = "[?] show custom keymap list" })
 
 function M.telescope_file_browser_mappings(fb_actions)
   return {
@@ -61,8 +67,5 @@ function M.telescope_file_browser_mappings(fb_actions)
     },
   }
 end
-
--- other
-map("n", "<leader>e", vim.diagnostic.open_float, { desc = "[E]xpand diagnostic message" })
 
 return M
