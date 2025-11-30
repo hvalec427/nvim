@@ -27,12 +27,22 @@ map("n", "<leader>fG", function()
   })
 end, { desc = "Live grep ALL (even node_modules)" })
 
+-- git
 map("n", "<leader>fs", function()
   telescope.git_status({
     initial_mode = "normal",
   })
 end, { desc = "Git status (normal mode)" })
 
+-- LazyGit
+map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
+
+-- lsp
+map("n", "gi", vim.lsp.buf.type_definition, { desc = "[g]o to [i]mplementation" })
+map("n", "gt", vim.lsp.buf.implementation, { desc = "[g]o to [t]ype definition" })
+map("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "[g]o to [r]eferences" })
+
+-- telescope browser
 map("n", "<leader>fb", function()
   require("telescope").extensions.file_browser.file_browser({
     path = "%:p:h",
@@ -40,11 +50,6 @@ map("n", "<leader>fb", function()
     initial_mode = "normal",
   })
 end, { desc = "File browser in current buffer dir" })
-
-map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
-
-map("n", "<leader>e", vim.diagnostic.open_float, { desc = "[E]xpand diagnostic message" })
-map("n", "grt", vim.lsp.buf.type_definition, { desc = "Go to type definition (LSP)" })
 
 function M.telescope_file_browser_mappings(fb_actions)
   return {
@@ -56,5 +61,8 @@ function M.telescope_file_browser_mappings(fb_actions)
     },
   }
 end
+
+-- other
+map("n", "<leader>e", vim.diagnostic.open_float, { desc = "[E]xpand diagnostic message" })
 
 return M

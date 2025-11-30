@@ -18,7 +18,9 @@ return {
         },
       })
 
-      vim.lsp.config("ts_ls", { capabilities = capabilities })
+      vim.lsp.config("ts_ls", {
+        capabilities = capabilities,
+      })
 
       require("mason-lspconfig").setup({
         ensure_installed = { "lua_ls", "ts_ls" },
