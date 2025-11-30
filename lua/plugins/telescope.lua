@@ -13,19 +13,12 @@ return {
     config = function()
       local telescope = require("telescope")
       local fb_actions = require("telescope").extensions.file_browser.actions
+      local keymaps = require("keymaps")
 
       telescope.setup({
         extensions = {
           file_browser = {
-            mappings = {
-              ["n"] = {
-                -- Normal mode
-                ["<leader>n"] = fb_actions.create,
-                ["<leader>r"] = fb_actions.rename,
-                ["<leader>d"] = fb_actions.remove,
-                ["<leader>m"] = fb_actions.move,
-              },
-            },
+            mappings = keymaps.telescope_file_browser_mappings(fb_actions),
           },
         },
       })
