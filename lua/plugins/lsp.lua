@@ -9,23 +9,24 @@ return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "ts_ls" },
-      })
-
-      local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      lspconfig.lua_ls.setup({
+      vim.lsp.config("lua_ls", {
         capabilities = capabilities,
         settings = {
           Lua = { diagnostics = { globals = { "vim" } } },
         },
       })
 
-      lspconfig.ts_ls.setup({ capabilities = capabilities })
+      vim.lsp.config("ts_ls", { capabilities = capabilities })
+
+      require("mason-lspconfig").setup({
+        ensure_installed = { "lua_ls", "ts_ls" },
+        automatic_enable = false,
+      })
+
+      vim.lsp.enable("lua_ls")
+      vim.lsp.enable("ts_ls")
     end,
   },
 }
-
