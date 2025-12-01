@@ -70,18 +70,16 @@ map("n", "<leader>gq", close_diff_windows, { desc = "Close diff (Diffview or Git
 -- LazyGit
 map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "[l]azy [g]it" })
 
--- lsp
-map("n", "gi", vim.lsp.buf.type_definition, { desc = "[g]o to [i]mplementation" })
-map("n", "gt", vim.lsp.buf.implementation, { desc = "[g]o to [t]ype definition" })
-map("n", "gR", vim.lsp.buf.references, { desc = "LSP references (no Telescope)" })
-map("n", "gr", function()
-  require("telescope.builtin").lsp_references({
+-- LSP references
+map("n", "grr", function()
+  telescope.lsp_references({
     initial_mode = "normal",
     include_current_file = true,
     include_declaration = false,
     show_line = true,
   })
-end)
+end, { desc = "LSP references (Telescope)" })
+map("n", "grR", vim.lsp.buf.references, { desc = "LSP references (no Telescope)" })
 
 -- telescope browser
 map("n", "<leader>fb", function()

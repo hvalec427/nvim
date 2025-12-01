@@ -71,6 +71,7 @@ Visual
 LSP
 - grn Rename
 - gra Code Action
+- grr References (Telescope)
+- grR References (no Telescope)
 - gri Go to Implementation
-- grr References
 - grt Type Definition
