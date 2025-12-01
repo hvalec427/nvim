@@ -34,6 +34,39 @@ map("n", "<leader>fs", function()
   })
 end, { desc = "[f]ile [s]tatus (Git status picker)" })
 
+-- git
+local function close_diff_windows()
+  local ok, lib = pcall(require, "diffview.lib")
+  if ok and lib.get_current_view() then
+    vim.cmd("DiffviewClose")
+    return
+  end
+
+  local current_win = vim.api.nvim_get_current_win()
+  local diff_found = false
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local has_diff = false
+    pcall(function()
+      has_diff = vim.api.nvim_win_get_option(win, "diff")
+    end)
+    if has_diff then
+      diff_found = true
+      if win ~= current_win then
+        pcall(vim.api.nvim_win_close, win, true)
+      end
+    end
+  end
+
+  if diff_found then
+    vim.cmd("diffoff!")
+  end
+end
+
+map("n", "<leader>gD", "<cmd>DiffviewOpen<CR>", { desc = "Diff working directory" })
+map("n", "<leader>gd", "<cmd>Gitsigns diffthis HEAD<CR>", { desc = "Diff current file vs last commit" })
+map("n", "<leader>gh", "<cmd>DiffviewFileHistory %<CR>", { desc = "File history (current file)" })
+map("n", "<leader>gq", close_diff_windows, { desc = "Close diff (Diffview or Gitsigns)" })
+
 -- LazyGit
 map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "[l]azy [g]it" })
 

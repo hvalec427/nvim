@@ -1,17 +1,17 @@
 local M = {}
 
 local entries = {
-  { plugin = "Telescope",     mode = "n", keys = "<leader>ff",            desc = "[f]uzzy [f]ind (ignore .gitignore, skip junk)" },
   { plugin = "Telescope",     mode = "n", keys = "<leader>fF",            desc = "[f]uzzy [F]IND (even node_modules)" },
-  { plugin = "Telescope",     mode = "n", keys = "<leader>fg",            desc = "[f]uzzy [g]rep (ignore .gitignore)" },
   { plugin = "Telescope",     mode = "n", keys = "<leader>fG",            desc = "[f]uzzy [G]REP (hit ALL files)" },
   { plugin = "Telescope",     mode = "n", keys = "<leader>fs",            desc = "[f]ile [s]tatus (Git status picker)" },
-  { plugin = "LazyGit",       mode = "n", keys = "<leader>lg",            desc = "[l]azy [g]it" },
+  { plugin = "Diffview",      mode = "n", keys = "<leader>gD",            desc = "Diff working directory" },
+  { plugin = "Gitsigns",      mode = "n", keys = "<leader>gd",            desc = "Diff current file vs last commit" },
+  { plugin = "Diffview",      mode = "n", keys = "<leader>gh",            desc = "File history (current file)" },
+  { plugin = "Diffview/Git",  mode = "n", keys = "<leader>gq",            desc = "Close diff (Diffview or Gitsigns)" },
   { plugin = "LSP",           mode = "n", keys = "gi",                    desc = "[g]o to [i]mplementation" },
   { plugin = "LSP",           mode = "n", keys = "gt",                    desc = "[g]o to [t]ype definition" },
   { plugin = "LSP",           mode = "n", keys = "gr",                    desc = "[g]o to [r]eferences(telescope)" },
   { plugin = "LSP",           mode = "n", keys = "gR",                    desc = "[g]o to [R]eferences(non telescope)" },
-  { plugin = "Telescope",     mode = "n", keys = "<leader>fb",            desc = "[f]ile [b]rowser (buffer dir)" },
   { plugin = "Diagnostics",   mode = "n", keys = "<leader>e",             desc = "[e]xpand diagnostic message" },
   { plugin = "Keymap Helper", mode = "n", keys = "<leader>?",             desc = "[?] show custom keymap list" },
   { plugin = "Word Motions",  mode = "n", keys = "w",                     desc = "[w] next word" },
