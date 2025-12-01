@@ -25,6 +25,11 @@ return {
       telescope.setup({
         extensions = {
           file_browser = {
+            grouped = true,
+            respect_gitignore = true,
+            hidden = false,
+            initial_mode = "normal",
+            hijack_netrw = true,
             mappings = keymaps.telescope_file_browser_mappings(fb_actions),
           },
         },

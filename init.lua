@@ -46,3 +46,41 @@ require("lazy").setup({
 -- Keymaps
 -- =========================
 require("keymaps")
+
+-- ========================
+-- Start hook
+-- ========================
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.cmd("enew | setlocal bufhidden=wipe | only")
+    require("telescope").extensions.file_browser.file_browser({
+      path = vim.loop.cwd(),
+      select_buffer = true,
+      initial_mode = "normal",
+      hidden = false,
+      respect_gitignore = true,
+      grouped = true,
+    })
+  end,
+})
+
+-- ========================
+-- other
+-- ========================
+-- Show concealed text as a single replacement char
+vim.opt.conceallevel = 2
+
+-- Optional: make sure syntax actually processes the whole line
+-- vim.opt.synmaxcol = 0   -- uncomment if you or your config limit syntax columns
+
+local col = 120 -- change this to whatever cutoff you want
+
+vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "Syntax", "ColorScheme" }, {
+  callback = function()
+    -- Remove any old rule
+    pcall(vim.cmd, "syntax clear LongHidden")
+
+    -- Add match: everything after column `col` gets concealed
+    vim.cmd("syntax match LongHidden /\\%>" .. col .. "v.*/ conceal cchar=…")
+  end,
+})
