@@ -49,19 +49,3 @@ require("lazy").setup({
 -- =========================
 require("keymaps")
 
--- ========================
--- Start hook
--- ========================
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    vim.cmd("enew | setlocal bufhidden=wipe | only")
-    require("telescope").extensions.file_browser.file_browser({
-      path = vim.loop.cwd(),
-      select_buffer = true,
-      initial_mode = "normal",
-      hidden = false,
-      respect_gitignore = true,
-      grouped = true,
-    })
-  end,
-})
