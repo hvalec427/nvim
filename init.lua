@@ -36,7 +36,6 @@ require("lazy").setup({
   require("plugins.telescope"),
   require("plugins.lualine"),
   require("plugins.cmp"),
-  require("plugins.codex"),
   require("plugins.lsp"),
   require("plugins.git_tools"),
   require("plugins.conform"),
