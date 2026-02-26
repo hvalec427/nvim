@@ -1,5 +1,4 @@
 local telescope = require("telescope.builtin")
-local keymap_list = require("keymap_list")
 local map = vim.keymap.set
 local M = {}
 
@@ -34,7 +33,6 @@ map("n", "<leader>fs", function()
   })
 end, { desc = "[f]ile [s]tatus (Git status picker)" })
 
--- git
 local function close_diff_windows()
   local ok, lib = pcall(require, "diffview.lib")
   if ok and lib.get_current_view() then
@@ -87,12 +85,6 @@ map("n", "<leader>fb", function()
   })
 end, { desc = "[f]ile [b]rowser (buffer dir)" })
 
-map("n", "<leader>e", vim.diagnostic.open_float, { desc = "[e]xpand diagnostic message" })
-
-map("n", "<leader>?", function()
-  keymap_list.show()
-end, { desc = "[?] show custom keymap list" })
-
 function M.telescope_file_browser_mappings(fb_actions)
   return {
     ["n"] = {
@@ -100,8 +92,36 @@ function M.telescope_file_browser_mappings(fb_actions)
       ["<leader>r"] = fb_actions.rename,
       ["<leader>d"] = fb_actions.remove,
       ["<leader>m"] = fb_actions.move,
+      ["<leader>ap"] = function(prompt_bufnr)
+        local actions = require("telescope.actions.state")
+        local entry = actions.get_selected_entry()
+        local path = entry and entry.path or nil
+        if path then
+          vim.fn.setreg('+', path)
+          print("Copied to clipboard: " .. path)
+        else
+          print("No path selected.")
+        end
+      end,
+      ["<leader>p"] = function(prompt_bufnr)
+        local actions = require("telescope.actions.state")
+        local entry = actions.get_selected_entry()
+        local path = entry and entry.path or nil
+        if path then
+          local cwd = vim.fn.getcwd()
+          local relpath = vim.fn.fnamemodify(path, ':~:.')
+          vim.fn.setreg('+', relpath)
+          print("Copied relative path: " .. relpath)
+        else
+          print("No path selected.")
+        end
+      end,
     },
   }
 end
+
+-- other
+map("n", "<leader>e", vim.diagnostic.open_float, { desc = "[e]xpand diagnostic message" })
+map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]], { desc = "[r]eplace [w]ord under cursor" })
 
 return M
