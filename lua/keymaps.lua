@@ -67,9 +67,6 @@ map("n", "<leader>gd", "<cmd>Gitsigns diffthis HEAD<CR>", { desc = "Diff current
 map("n", "<leader>gh", "<cmd>DiffviewFileHistory %<CR>", { desc = "File history (current file)" })
 map("n", "<leader>gq", close_diff_windows, { desc = "Close diff (Diffview or Gitsigns)" })
 
--- LazyGit
-map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "[l]azy [g]it" })
-
 -- LSP references
 map("n", "grr", function()
   telescope.lsp_references({
