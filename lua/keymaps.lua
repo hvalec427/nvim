@@ -121,6 +121,31 @@ function M.telescope_file_browser_mappings(fb_actions)
   }
 end
 
+-- Copilot
+map("i", "<C-l>", 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false,
+  desc = "Copilot Accept",
+})
+
+--- Copilot Chat
+local copilotchat = require("CopilotChat")
+
+-- Normal: open chat + include *this* buffer explicitly
+map("n", "<leader>cc", function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  copilotchat.open({
+    sticky = { "#buffer:" .. bufnr },
+  })
+end, { desc = "CopilotChat: current buffer" })
+
+-- Visual: open chat + include selection
+map("v", "<leader>cc", function()
+  copilotchat.open({
+    sticky = { "#selection" },
+  })
+end, { desc = "CopilotChat: selection" })
+
 -- other
 map("n", "<leader>e", vim.diagnostic.open_float, { desc = "[e]xpand diagnostic message" })
 
