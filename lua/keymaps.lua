@@ -64,6 +64,7 @@ map("n", "<leader>gD", "<cmd>DiffviewOpen<CR>", { desc = "Diff working directory
 map("n", "<leader>gd", "<cmd>Gitsigns diffthis HEAD<CR>", { desc = "Diff current file vs last commit" })
 map("n", "<leader>gh", "<cmd>DiffviewFileHistory %<CR>", { desc = "File history (current file)" })
 map("n", "<leader>gq", close_diff_windows, { desc = "Close diff (Diffview or Gitsigns)" })
+map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[r]e[n]ame (LSP)" })
 
 -- LSP references
 map("n", "grr", function()
@@ -122,6 +123,5 @@ end
 
 -- other
 map("n", "<leader>e", vim.diagnostic.open_float, { desc = "[e]xpand diagnostic message" })
-map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]], { desc = "[r]eplace [w]ord under cursor" })
 
 return M
