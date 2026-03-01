@@ -2,6 +2,8 @@
 
 Personal, Lua-first Neovim configuration that keeps my editing environment identical on every machine. It sets sensible defaults (indentation, search, numbers, clipboard), applies a small set of opinionated keymaps, and wires up the tooling I rely on for coding, writing, and navigating large repositories.
 
+> ⚠️ This repository is archived; the configuration now lives in the dotfiles repo at https://github.com/hvalec427/dotfiles.
+
 ## Project Layout
 
 - `init.lua` is the single entry point. It sets options, defines autocommands, bootstraps all external packages, and then loads the Lua modules that actually power the editor.
